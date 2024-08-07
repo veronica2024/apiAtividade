@@ -1,10 +1,21 @@
-// importa oas bibliotecas
-const express = require('express'); // 
+// importa as bibliotecas
+
+
 const dotenv = require('dotenv');
+
+
+
+const express = require('express'); // 
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
+
+const db = require('./config/db');
+
+
+
 const productsRoutes = require('./routes/products');
+
 
 
 //configurar as variáveis de ambiente 
@@ -23,7 +34,7 @@ app.use('/api/products', productsRoutes);
 //Rota inicial para testar o servidor
 
 app.get('/',(req,res) => {
-    res.send(`Servidor esta rodando ${PORT}`)
+    res.send('Servidor esta rodando ')
 });
 
 // Configura o servidor para escutar em uma porta específica 
@@ -35,7 +46,7 @@ app.listen(PORT, () => {
    }); 
 
 
-   const db = require('./config/db');
+  
 
 
 

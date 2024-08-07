@@ -16,7 +16,7 @@ const getAllProducts = (req, res) => {
 
 
 
-const addProduct = (req, res) => {
+const addProducts = (req, res) => {
   const { name, description, category, price, stock, expiry_date } = req.body;
 
   db.query(
@@ -56,7 +56,7 @@ const addProduct = (req, res) => {
 //ATUALIZAR OS PRODUTOS
 
 
-const updateProductPut = (req, res) => {
+const updateProductsPut = (req, res) => {
   const { id } = req.params;
   const { name, description, category, price, stock, expiry_date } = req.body;
   db.query(
@@ -81,11 +81,11 @@ const updateProductPut = (req, res) => {
 //ATUALIZAR UM PRODUTO
 
 
-const updateProductPatch = (req, res) => {
-  const { id } = req.params;
-  const fields = req.body;
-  const query = [];
-  const values = [];
+const updateProductsPatch = (req, res) => {
+      const { id } = req.params;
+      const fields = req.body;
+      const query = [];
+      const values = [];
 
   for (const [key, value] of Object.entries(fields)) {
     query.push(`${key} = ?`);
@@ -95,7 +95,7 @@ const updateProductPatch = (req, res) => {
   values.push(id);
 
   db.query(
-    `UPDATE products SET ${query.join(', ')} WHERE id = ?`,
+    `UPDATE products SET ${query.join(',')} WHERE id = ?`,
     values,
     (err, results) => {
       if (err) {
@@ -118,7 +118,7 @@ const updateProductPatch = (req, res) => {
 
 
 
-const deleteProduct = (req, res) => {
+const deleteProducts = (req, res) => {
   const { id } = req.params;
   db.query('DELETE FROM products WHERE id = ?', [id], (err, results) => {
     if (err) {
@@ -143,8 +143,8 @@ const deleteProduct = (req, res) => {
 
 module.exports = {
   getAllProducts,
-  addProduct,
-  updateProductPut,
-  updateProductPatch,
-  deleteProduct
+  addProducts,
+  updateProductsPut,
+  updateProductsPatch,
+  deleteProducts
 };
